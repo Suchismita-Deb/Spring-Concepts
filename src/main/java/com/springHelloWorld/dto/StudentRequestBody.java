@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 public class StudentRequestBody {
     private int count;
-    @JsonProperty("studentIds")
+    @JsonProperty("studentIds")//If the name in the request bofy differs from variable name
     private List<String> studentIdList;
     private String greeting;
 }

@@ -18,13 +18,18 @@
 {
     "greeting":"F",
     "count":10,
-    "values":["10","12.5","50","111"]
+    "studentIds":["10","12.5","50","111"]
 }
 ```
 
-Corrosponding Java class to catch the request Body
+Corresponding Java class to catch the request Body
 
 ```java
-
+public class StudentRequestBody {
+    private int count;
+    @JsonProperty("studentIds")//If the name in the request body differs from variable name
+    private List<String> studentIdList;
+    private String greeting;
+}
 ```
 
