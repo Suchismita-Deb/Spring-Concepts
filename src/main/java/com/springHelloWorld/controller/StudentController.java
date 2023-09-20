@@ -55,6 +55,7 @@ public class StudentController {
             produces = {"application/json"})
 
     public StudentDtoClass getStudentByIdsRequestBody(@RequestBody StudentRequestBody studentRequestBody){
+
         logger.trace(studentRequestBody.getGreeting());//TODO: Server debugging.
         List<String> studentIdStringList = studentRequestBody.getStudentIdList();
         System.out.println(studentIdStringList);
