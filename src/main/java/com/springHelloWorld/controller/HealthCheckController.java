@@ -1,12 +1,16 @@
 package com.springHelloWorld.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
+@RequestMapping("/health")
 public class HealthCheckController {
-    @GetMapping("/healthCheck")
-    public String hello(){
+    @RequestMapping(
+            path = "/check",
+            method = RequestMethod.GET
+    )
+    public @ResponseBody String hello(){
         return "Health is Ok";
     }
 }
