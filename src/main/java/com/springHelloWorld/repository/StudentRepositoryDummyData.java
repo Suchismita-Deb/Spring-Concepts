@@ -1,6 +1,5 @@
 package com.springHelloWorld.repository;
 
-import com.springHelloWorld.dto.StudentDto;
 import com.springHelloWorld.model.Student;
 import org.springframework.stereotype.Repository;
 
@@ -9,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public class StudentRepository {
+public class StudentRepositoryDummyData {
 
     public Student getStudentById(int studentId){
         //Sending dummy student details.

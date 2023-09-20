@@ -2,7 +2,7 @@ package com.springHelloWorld.service;
 
 import com.springHelloWorld.dto.StudentDto;
 import com.springHelloWorld.model.Student;
-import com.springHelloWorld.repository.StudentRepository;
+import com.springHelloWorld.repository.StudentRepositoryDummyData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,10 @@ import java.util.List;
 @Service
 public class StudentService {
     @Autowired
-    StudentRepository studentRepository;
+    StudentRepositoryDummyData studentRepositoryDummyData;
 
     public StudentDto getStudentById(int studentId){
-        Student studentById = studentRepository.getStudentById(studentId);
+        Student studentById = studentRepositoryDummyData.getStudentById(studentId);
         StudentDto studentDto = getStudentDtoFromStudent(studentById);
 
         return studentDto;
@@ -32,7 +32,7 @@ public class StudentService {
     }
 
     public List<StudentDto> getStudentByIds(List<Integer> studentIdList) {
-        List<Student> studentDetailsList = studentRepository.getMultipleStudentByIds(studentIdList);
+        List<Student> studentDetailsList = studentRepositoryDummyData.getMultipleStudentByIds(studentIdList);
         List<StudentDto> studentDtoList = new ArrayList<>();
         for(Student s:studentDetailsList){
             StudentDto singleStudentDto = getStudentDtoFromStudent(s);
