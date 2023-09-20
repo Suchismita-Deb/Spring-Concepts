@@ -19,7 +19,8 @@ public class StudentServiceWithDb {
 
     public StudentDto getStudentById(int studentId){
         Optional<Student> studentById = studentRepository.findById(studentId);
-        StudentDto studentDto = getStudentDtoFromStudent(studentById.get());
+        Student student = studentById.orElseGet(() -> Student.builder().build());//Return empty constructor if no data/Null
+        StudentDto studentDto = getStudentDtoFromStudent(student);
         return studentDto;
     }
 

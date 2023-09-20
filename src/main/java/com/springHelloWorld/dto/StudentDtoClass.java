@@ -12,6 +12,6 @@ import java.util.List;
 @Builder
 public class StudentDtoClass {
     private int count;
-    @JsonProperty("dataxyz") //This will appear in the JSON response.
+    @JsonProperty("data") //This will appear in the JSON response.
     private List<StudentDto> studentDtoList;
 }

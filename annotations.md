@@ -141,14 +141,24 @@ public List<StudentDto> getStudentByIdsByMap(@RequestBody Map<String,List<Intege
 }
 ```
 
+Curl Request
+
+```shell
+curl --location 'localhost:8090/student/db/studentIdsByMap' \
+--header 'Content-Type: application/json' \
+--data '{
+    "studentIds": ["1","2","3","4","5",""]
+}'
+```
+
 
 ### With Class as Request Body
 
 ```json
 {
-    "greeting":"F",
-    "count":10,
-    "studentIds":["10","12.5","50","111"]
+  "greeting":"Hi from postman.",
+  "count":5,
+  "studentIds": ["1","2","3","4","5"]
 }
 ```
 
@@ -171,7 +181,15 @@ public class StudentRequestBody {
 }
 ```
 
-
+```shell
+curl --location 'localhost:8090/student/db/studentIdsByClassName' \
+--header 'Content-Type: application/json' \
+--data '{
+    "greeting":"Hi from postman.",
+    "count":5,
+    "studentIds": ["1","2","3","4","5"]
+}'
+```
 
 # Simple Jackson Mapping
 

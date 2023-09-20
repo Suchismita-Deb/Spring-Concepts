@@ -30,6 +30,7 @@ public class StudentDbController {
     }
 
     @RequestMapping(path = "/requestMapping/{studentId}",
+            method = RequestMethod.GET,
             produces = { "application/json", MediaType.APPLICATION_XML_VALUE,  MediaType.APPLICATION_PDF_VALUE})
     public @ResponseBody StudentDto getStudentByIdRequestMapping(@PathVariable String studentId){
         int studentIntId = Integer.valueOf(studentId);
