@@ -34,7 +34,7 @@ public class StudentRepositoryDummyData {
                 .lastName("Deb")
                 .cityOfBirth("XYZ")
                 .dob(new Date())
-                .email("ab@gmail.com")
+                .email("ab%gmail.com")
                 .gender("Female")
                 .university("XYZ College")
                 .build();

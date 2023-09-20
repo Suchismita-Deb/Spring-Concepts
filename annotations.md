@@ -1,4 +1,7 @@
 # Stereotype Annotations
+
+> Basic philosophy : Conventions over configurations
+
 ```java
 @Component 
 @Controller 
@@ -88,13 +91,31 @@ StudentService studentService;//Free to use studentService object within the cla
 ### Difference between PathVariable and RequestParam
 
 
-Read the Path Variable
+##### Read the Path Variable
+
 `@PathVariable` in the method parameter
 
 ```java
 @GetMapping("/student/{studentId}")
 public ResponseEntity<Student> getStudentById(@PathVariable Long studentId) {
     return ResponseEntity.ok(studentService.getStudentById(userId));
+}
+```
+
+##### Reading via RequestParam
+
+> ```javascript
+> /jpa/students/pagination?pageSize=5&pageNo=1&sortBy=email
+> ```
+
+```java
+// Retrieve all users page by page
+@GetMapping(path = "/students/pagination")
+public List<Student> 
+    retrieveAllUsersPagination(@RequestParam(defaultValue = "0") Integer pageNo,
+                                                @RequestParam(defaultValue = "10") Integer pageSize,
+                                                @RequestParam(defaultValue = "id") String sortBy) {
+        ...
 }
 ```
 
