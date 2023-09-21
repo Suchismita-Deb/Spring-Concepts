@@ -1,46 +1,38 @@
 package com.springHelloWorld.service;
 
 import com.springHelloWorld.dto.StudentDto;
+import com.springHelloWorld.mapper.StudentMapper;
 import com.springHelloWorld.model.Student;
 import com.springHelloWorld.repository.StudentRepository;
-import com.springHelloWorld.repository.StudentRepositoryDummyData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceWithDb {
-
-    @Autowired
-    StudentRepository studentRepository;
+    @Autowired StudentRepository studentRepository;
+    @Autowired StudentMapper studentMapper;
 
     public StudentDto getStudentById(int studentId){
-        Optional<Student> studentById = studentRepository.findById(studentId);
-        Student student = studentById.orElseGet(() -> Student.builder().build());//Return empty constructor if no data/Null
-        StudentDto studentDto = getStudentDtoFromStudent(student);
-        return studentDto;
-    }
+        Optional<Student> studentById = studentRepository.findById(studentId);//Method from JPA Repo, returns Optional
+        Student student = studentById.orElseGet(Student::new);//Return empty constructor if no data/Null
+        //student = studentById.orElseGet(() -> new Student());
+        //student = studentById.orElseGet(() -> Student.builder().build());
 
-    private static StudentDto getStudentDtoFromStudent(Student studentById) {
-        return StudentDto.builder()
-                .fullName(studentById.getFirstName() + " " + studentById.getLastName())
-                .city(studentById.getCityOfBirth())
-                .sex(studentById.getGender())
-                .university(studentById.getUniversity())
-                .emailId(studentById.getEmail())//TODO: The email validation.
-                .build();
+        StudentDto studentDto = studentMapper.convert(student);//Convertor/Mapper/Transformer
+        return studentDto;
     }
 
     public List<StudentDto> getStudentByIds(List<Integer> studentIdList) {
         List<Student> studentDetailsList = studentRepository.findAllById(studentIdList);
-        List<StudentDto> studentDtoList = new ArrayList<>();
-        for(Student s:studentDetailsList){
-            StudentDto singleStudentDto = getStudentDtoFromStudent(s);
-            studentDtoList.add(singleStudentDto);
-        }
+
+        List<StudentDto> studentDtoList = studentDetailsList.stream()
+                .map(studentMapper::convert)
+                .collect(Collectors.toList());
         return studentDtoList;
     }
 }

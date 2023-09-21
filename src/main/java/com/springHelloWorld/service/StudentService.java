@@ -1,6 +1,7 @@
 package com.springHelloWorld.service;
 
 import com.springHelloWorld.dto.StudentDto;
+import com.springHelloWorld.mapper.StudentMapper;
 import com.springHelloWorld.model.Student;
 import com.springHelloWorld.repository.StudentRepositoryDummyData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,36 +9,37 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
-    @Autowired
-    StudentRepositoryDummyData studentRepositoryDummyData;
+    @Autowired StudentRepositoryDummyData studentRepositoryDummyData;
+    @Autowired StudentMapper studentMapper;
 
     public StudentDto getStudentById(int studentId){
         Student studentById = studentRepositoryDummyData.getStudentById(studentId);
-        StudentDto studentDto = getStudentDtoFromStudent(studentById);
+        StudentDto studentDto = studentMapper.convert(studentById);
 
         return studentDto;
     }
 
-    private static StudentDto getStudentDtoFromStudent(Student studentById) {
-        return StudentDto.builder()
-                .fullName(studentById.getFirstName() + " " + studentById.getLastName())
-                .city(studentById.getCityOfBirth())
-                .sex(studentById.getGender())
-                .university(studentById.getUniversity())
-                .emailId(studentById.getEmail())//TODO: The email validation.
-                .build();
-    }
-
     public List<StudentDto> getStudentByIds(List<Integer> studentIdList) {
         List<Student> studentDetailsList = studentRepositoryDummyData.getMultipleStudentByIds(studentIdList);
-        List<StudentDto> studentDtoList = new ArrayList<>();
+
+        //Intuitive way
+        /*List<StudentDto> studentDtoList = new ArrayList<>();
         for(Student s:studentDetailsList){
-            StudentDto singleStudentDto = getStudentDtoFromStudent(s);
+            StudentDto singleStudentDto = studentMapper.convert(s);
             studentDtoList.add(singleStudentDto);
-        }
+        }*/
+
+        //Java 8
+        List<StudentDto> studentDtoList = studentDetailsList.stream()
+                //.filter(Objects::nonNull)//Remove any null rows if needed
+                .map(studentMapper::convert)
+                .collect(Collectors.toList());
+
         return studentDtoList;
     }
 }

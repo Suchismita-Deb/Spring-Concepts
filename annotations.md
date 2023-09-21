@@ -191,6 +191,107 @@ curl --location 'localhost:8090/student/db/studentIdsByClassName' \
 }'
 ```
 
+# Service 
+
+For a single student Id, JPA's findById method can be utilized. It returns an Optional, so if in case the return is 
+a null Optional Class findById can be utilized
+
+```java
+Optional<Student> studentById = studentRepository.findById(studentId);//Method from JPA Repo, returns Optional
+Student student = studentById.orElseGet(Student::new);//Return empty constructor if no data/Null
+```
+
+The supplier in orElseGet can be rewritten in whichever way feels intuitive. 
+```java
+Student student = studentById.orElseGet(Student::new);//Return empty constructor if no data/Null
+//student = studentById.orElseGet(() -> new Student());
+//student = studentById.orElseGet(() -> Student.builder().build());
+```
+
+If the class structure of DAO Class is different than the DTO Class, then separate mappers or convertors can be written.
+
+The convert method takes in DAO Object and returns DTO object
+```java
+StudentDto studentDto = studentMapper.convert(student);//Convertor/Mapper/Transformer
+```
+
+Mapper of convertor can be written as 
+
+```java
+@Component
+public class StudentMapper {
+
+    public StudentDto convert(Student studentById) {
+        return StudentDto.builder()
+                .fullName(studentById.getFirstName() + " " + studentById.getLastName())
+                .city(studentById.getCityOfBirth())
+                .sex(studentById.getGender())
+                .university(studentById.getUniversity())
+                .emailId(studentById.getEmail())//TODO: The email validation.
+                .build();
+    }
+}
+```
+
+Over all the service class with method to return a single student object would look like
+```java
+@Service
+public class StudentServiceWithDb {
+    @Autowired
+    StudentRepository studentRepository;
+    @Autowired
+    StudentMapper studentMapper;
+
+    public StudentDto getStudentById(int studentId) {
+        Optional<Student> studentById = studentRepository.findById(studentId);//Method from JPA Repo, returns Optional
+        Student student = studentById.orElseGet(Student::new);//Return empty constructor if no data/Null
+        //student = studentById.orElseGet(() -> new Student());
+        //student = studentById.orElseGet(() -> Student.builder().build());
+
+        StudentDto studentDto = studentMapper.convert(student);//Convertor/Mapper/Transformer
+        return studentDto;
+    }
+}
+```
+
+The method that returns a List of objects, based on the multiple student id's passed can be written using the 
+findAllByIds method of JpaRepository Interface.
+
+```java
+List<Student> studentDetailsList = studentRepository.findAllById(studentIdList);
+```
+In order to convert the list of DAP objects to a list of DTO objects, the intuition could be of for loop like this
+
+```java
+ //Intuitive way
+List<StudentDto> studentDtoList = new ArrayList<>();
+for(Student s:studentDetailsList){
+    StudentDto singleStudentDto = studentMapper.convert(s);
+    studentDtoList.add(singleStudentDto);
+}
+```
+
+But a better way of achieving this is the use of functional style of programming
+```java
+//Java 8
+List<StudentDto> studentDtoList = studentDetailsList.stream()
+        //.filter(Objects::nonNull)//Remove any null rows if needed
+        .map(studentMapper::convert)
+        .collect(Collectors.toList());
+```
+
+Finally, the overall method would is
+```java
+public List<StudentDto> getStudentByIds(List<Integer> studentIdList) {
+    List<Student> studentDetailsList = studentRepository.findAllById(studentIdList);
+
+    List<StudentDto> studentDtoList = studentDetailsList.stream()
+            .map(studentMapper::convert)
+            .collect(Collectors.toList());
+    return studentDtoList;
+}
+```
+
 # Simple Jackson Mapping
 
 ```java
