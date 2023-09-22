@@ -280,7 +280,7 @@ List<StudentDto> studentDtoList = studentDetailsList.stream()
         .collect(Collectors.toList());
 ```
 
-Finally, the overall method would is
+Finally, the overall method would be
 ```java
 public List<StudentDto> getStudentByIds(List<Integer> studentIdList) {
     List<Student> studentDetailsList = studentRepository.findAllById(studentIdList);

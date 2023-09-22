@@ -3,6 +3,8 @@ package com.springHelloWorld.controller;
 import com.springHelloWorld.dto.StudentDto;
 import com.springHelloWorld.dto.StudentDtoClass;
 import com.springHelloWorld.dto.StudentRequestBody;
+import com.springHelloWorld.exception.GlobalExceptionHandler;
+import com.springHelloWorld.exception.StudentNotFoundException;
 import com.springHelloWorld.service.StudentServiceWithDb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.rmi.StubNotFoundException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,7 +28,12 @@ public class StudentDbController {
             produces = { "application/json", MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_PDF_VALUE})
     public StudentDto getStudentById(@PathVariable String studentId){
         int studentIntId = Integer.valueOf(studentId);
-        StudentDto studentDetailById = studentDbService.getStudentById(studentIntId);
+        StudentDto studentDetailById = null;
+        try {
+            studentDetailById = studentDbService.getStudentById(studentIntId);
+        } catch (StudentNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         return studentDetailById;
     }
 
@@ -34,14 +42,19 @@ public class StudentDbController {
             produces = { "application/json", MediaType.APPLICATION_XML_VALUE,  MediaType.APPLICATION_PDF_VALUE})
     public @ResponseBody StudentDto getStudentByIdRequestMapping(@PathVariable String studentId){
         int studentIntId = Integer.valueOf(studentId);
-        StudentDto studentDetailById = studentDbService.getStudentById(studentIntId);
+        StudentDto studentDetailById = null;
+        try {
+            studentDetailById = studentDbService.getStudentById(studentIntId);
+        } catch (StudentNotFoundException e) {
+            throw new RuntimeException(e);
+        }
         return studentDetailById;
     }
 
     @PostMapping(path = "/studentIdsByMap",
             consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {"application/json"})
-    public List<StudentDto> getStudentByIdsByMap(@RequestBody Map<String,List<Integer>> mapStudentIds){
+    public List<StudentDto> getStudentByIdsByMap(@RequestBody Map<String,List<Integer>> mapStudentIds) throws StudentNotFoundException {
         List<Integer> studentIdList = mapStudentIds.get("studentIds");
         List<StudentDto> studentDetailById = studentDbService.getStudentByIds(studentIdList);
         return studentDetailById;
