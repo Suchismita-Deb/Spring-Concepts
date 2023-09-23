@@ -1,14 +1,13 @@
 package com.springHelloWorld.service;
 
 import com.springHelloWorld.dto.StudentDto;
-import com.springHelloWorld.exception.StudentNotFoundException;
+import com.springHelloWorld.exception.business.StudentNotFoundException;
 import com.springHelloWorld.mapper.StudentMapper;
 import com.springHelloWorld.model.Student;
 import com.springHelloWorld.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,17 +17,16 @@ public class StudentServiceWithDb {
     @Autowired StudentRepository studentRepository;
     @Autowired StudentMapper studentMapper;
 
-    public StudentDto getStudentById(int studentId) throws StudentNotFoundException {
-        Optional<Student> studentById = studentRepository.findById(studentId);//Method from JPA Repo, returns Optional
-        //Student student = studentById.orElseGet(Student::new);//Return empty constructor if no data/Null
-        //student = studentById.orElseGet(() -> new Student());
-        //student = studentById.orElseGet(() -> Student.builder().build());
+    public StudentDto getStudentById(int studentId)  {
+        Optional<Student> studentById = null;//Method from JPA Repo, returns Optional
+        studentById = studentRepository.findById(studentId);
 
-        //Throw custom Exception
-        Student student = studentById.orElseThrow(() -> new StudentNotFoundException("No Student"));//Return empty
-        // constructor if no
-        // data/Null
+        Student student = studentById.orElseGet(Student::new);//Return empty constructor if no data/Null
+        //Throw custom Exception, in case business requirement is not to return empty data
+        //Student student = student = studentById.orElseThrow(() -> new StudentNotFoundException("The Student with Id
+        // " + studentId + " " + "does not exist"));
 
+        //Convert the DB Model into Response DTO
         StudentDto studentDto = studentMapper.convert(student);//Convertor/Mapper/Transformer
         return studentDto;
     }

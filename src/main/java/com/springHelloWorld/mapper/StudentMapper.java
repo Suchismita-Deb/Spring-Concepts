@@ -11,7 +11,7 @@ public class StudentMapper {
         return StudentDto.builder()
                 .fullName(studentById.getFirstName() + " " + studentById.getLastName())
                 .city(studentById.getCityOfBirth())
-                .sex(studentById.getGender())
+                .sex(studentById.getGender() == null ? "":studentById.getGender())
                 .university(studentById.getUniversity())
                 .emailId(studentById.getEmail())//TODO: The email validation.
                 .build();

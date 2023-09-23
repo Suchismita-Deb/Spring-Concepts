@@ -3,16 +3,14 @@ package com.springHelloWorld.controller;
 import com.springHelloWorld.dto.StudentDto;
 import com.springHelloWorld.dto.StudentDtoClass;
 import com.springHelloWorld.dto.StudentRequestBody;
-import com.springHelloWorld.exception.GlobalExceptionHandler;
-import com.springHelloWorld.exception.StudentNotFoundException;
+import com.springHelloWorld.exception.business.DbDownException;
+import com.springHelloWorld.exception.business.SomeBusinessException;
+import com.springHelloWorld.exception.business.StudentNotFoundException;
 import com.springHelloWorld.service.StudentServiceWithDb;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import java.rmi.StubNotFoundException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,30 +22,26 @@ public class StudentDbController {
     StudentServiceWithDb studentDbService;
 
     @GetMapping(value = "/{studentId}", path = "/{studentId}",
-            consumes = {MediaType.TEXT_PLAIN_VALUE, MediaType.APPLICATION_JSON_VALUE},
             produces = { "application/json", MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_PDF_VALUE})
-    public StudentDto getStudentById(@PathVariable String studentId){
+    public StudentDto getStudentById(@PathVariable String studentId) throws
+            StudentNotFoundException, DbDownException, SomeBusinessException {
         int studentIntId = Integer.valueOf(studentId);
-        StudentDto studentDetailById = null;
-        try {
-            studentDetailById = studentDbService.getStudentById(studentIntId);
-        } catch (StudentNotFoundException e) {
-            throw new RuntimeException(e);
+        if(true) {
+            throw new StudentNotFoundException("Student not found");
+            //throw new DbDownException("DB is Down");
+            //throw new IllegalArgumentException("test");
+            //throw new SomeBusinessException("Some Business Exception");
         }
+        StudentDto studentDetailById = studentDbService.getStudentById(studentIntId);
         return studentDetailById;
     }
 
     @RequestMapping(path = "/requestMapping/{studentId}",
             method = RequestMethod.GET,
             produces = { "application/json", MediaType.APPLICATION_XML_VALUE,  MediaType.APPLICATION_PDF_VALUE})
-    public @ResponseBody StudentDto getStudentByIdRequestMapping(@PathVariable String studentId){
+    public @ResponseBody StudentDto getStudentByIdRequestMapping(@PathVariable String studentId) throws StudentNotFoundException {
         int studentIntId = Integer.valueOf(studentId);
-        StudentDto studentDetailById = null;
-        try {
-            studentDetailById = studentDbService.getStudentById(studentIntId);
-        } catch (StudentNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        StudentDto studentDetailById = studentDbService.getStudentById(studentIntId);
         return studentDetailById;
     }
 
