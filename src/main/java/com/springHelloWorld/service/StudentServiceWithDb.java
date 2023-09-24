@@ -6,6 +6,7 @@ import com.springHelloWorld.mapper.StudentMapper;
 import com.springHelloWorld.model.Student;
 import com.springHelloWorld.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +15,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class StudentServiceWithDb {
-    @Autowired StudentRepository studentRepository;
-    @Autowired StudentMapper studentMapper;
+
+    private StudentRepository studentRepository;
+    @Autowired
+    private StudentMapper studentMapper;//Field Injection
+
+    public StudentServiceWithDb(@Qualifier("jpaStudentRepository") StudentRepository studentRepository) {//Constructor injection
+        this.studentRepository = studentRepository;
+    }
 
     public StudentDto getStudentById(int studentId)  {
         Optional<Student> studentById = null;//Method from JPA Repo, returns Optional
@@ -33,14 +40,6 @@ public class StudentServiceWithDb {
 
     public List<StudentDto> getStudentByIds(List<Integer> studentIdList) {
         List<Student> studentDetailsList = studentRepository.findAllById(studentIdList);
-
-        if(true){
-            try {
-                throw new StudentNotFoundException("Student doesn't exist");
-            } catch (StudentNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-        }
         List<StudentDto> studentDtoList = studentDetailsList.stream()
                 .map(studentMapper::convert)
                 .collect(Collectors.toList());

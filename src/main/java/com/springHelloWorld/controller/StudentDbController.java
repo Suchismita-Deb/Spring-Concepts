@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/student/db")
 public class StudentDbController {
     @Autowired
-    StudentServiceWithDb studentDbService;
+    private StudentServiceWithDb studentDbService;//Field Injection
 
     @GetMapping(value = "/{studentId}", path = "/{studentId}",
             produces = { "application/json", MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_PDF_VALUE})
