@@ -2,7 +2,7 @@ package com.springHelloWorld.service.qualifer;
 
 import org.springframework.stereotype.Service;
 
-@Service("creditCardService")
+@Service(value = "creditCardService")
 public class CreditCardPaymentService implements PaymentService{
     @Override
     public String processPayment() {

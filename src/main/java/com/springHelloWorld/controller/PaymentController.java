@@ -18,7 +18,7 @@ public class PaymentController {
     private PaymentService onlineBankingpaymentService;
 
     @Autowired
-    public PaymentController(@Qualifier("creditCardService") PaymentService creditCardPaymentService,
+    public PaymentController(@Qualifier(value = "creditCardService") PaymentService creditCardPaymentService,
                              @Qualifier("onlineBankingService") PaymentService onlineBankingpaymentService) {
         this.creditCardpaymentService = creditCardPaymentService;
         this.onlineBankingpaymentService = onlineBankingpaymentService;
