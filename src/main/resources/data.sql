@@ -1,14 +1,3 @@
-DROP TABLE IF EXISTS student;
-create table student (
-	id INT,
-	first_name VARCHAR(50),
-	last_name VARCHAR(50),
-	gender VARCHAR(50),
-	cityOfBirth VARCHAR(50),
-	email VARCHAR(50),
-	university VARCHAR(200),
-	dob DATE
-);
 insert into student (id, first_name, last_name, gender, cityOfBirth, email, university, dob) values (1, 'Anjanette', 'Pietrzyk', 'Female', 'Ugljevik', 'apietrzyk0@wufoo.com', 'Sul Ross State University', '1972-01-30');
 insert into student (id, first_name, last_name, gender, cityOfBirth, email, university, dob) values (2, 'Rozanne', 'Bulford', 'Female', 'Kuala Lumpur', 'rbulford1@163.com', 'Notre Dame University', '1994-12-21');
 insert into student (id, first_name, last_name, gender, cityOfBirth, email, university, dob) values (3, 'Padget', 'Ridings', 'Male', 'San Jose', 'pridings2@unicef.org', 'University of Texas at El Paso', '1976-11-28');
