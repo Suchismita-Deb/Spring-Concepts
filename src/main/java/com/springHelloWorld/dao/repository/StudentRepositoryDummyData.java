@@ -1,4 +1,4 @@
-package com.springHelloWorld.repository;
+package com.springHelloWorld.dao.repository;
 
 import com.springHelloWorld.model.Student;
 import org.springframework.stereotype.Repository;

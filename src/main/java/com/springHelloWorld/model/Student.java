@@ -15,7 +15,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 @Builder
 @Entity
-//@Table(name="student", schema = "test")
+@Table(name="student")
 public class Student {
     @Id
     private int id;

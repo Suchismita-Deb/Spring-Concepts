@@ -3,13 +3,11 @@ package com.springHelloWorld.service;
 import com.springHelloWorld.dto.StudentDto;
 import com.springHelloWorld.mapper.StudentMapper;
 import com.springHelloWorld.model.Student;
-import com.springHelloWorld.repository.StudentRepositoryDummyData;
+import com.springHelloWorld.dao.repository.StudentRepositoryDummyData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service

@@ -1,10 +1,9 @@
 package com.springHelloWorld.service;
 
 import com.springHelloWorld.dto.StudentDto;
-import com.springHelloWorld.exception.business.StudentNotFoundException;
 import com.springHelloWorld.mapper.StudentMapper;
 import com.springHelloWorld.model.Student;
-import com.springHelloWorld.repository.StudentRepository;
+import com.springHelloWorld.dao.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
