@@ -1,5 +1,6 @@
 package com.springHelloWorld.service;
 
+import com.springHelloWorld.dao.pg.PgJdbcTemplate;
 import com.springHelloWorld.dto.StudentPgDto;
 import com.springHelloWorld.mapper.StudentMapper;
 import com.springHelloWorld.model.Student;
@@ -15,10 +16,14 @@ public class StudentServiceWithPg {
     private StudentRepository studentRepository;
     private StudentMapper mapper;
 
+    private PgJdbcTemplate pgJdbcTemplate;
+
+
     @Autowired
-    public StudentServiceWithPg(@Qualifier("jpaStudentRepository") StudentRepository studentRepository, StudentMapper mapper) {
+    public StudentServiceWithPg(@Qualifier("jpaStudentRepository") StudentRepository studentRepository, StudentMapper mapper, PgJdbcTemplate pgJdbcTemplate) {
         this.studentRepository = studentRepository;
         this.mapper = mapper;
+        this.pgJdbcTemplate = pgJdbcTemplate;
     }
 
     public List<StudentPgDto> getStudentById()  {
@@ -30,5 +35,12 @@ public class StudentServiceWithPg {
                 .collect(Collectors.toList());
 */
         return null;
+    }
+
+    public Student getStudentByIdPgJdbc(int id){
+        Student student = pgJdbcTemplate.runQueryAndGetResult(id);
+
+        return student;
+
     }
 }
