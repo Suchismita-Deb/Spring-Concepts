@@ -8,9 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EntityScan(basePackages = "com.springHelloWorld.model")
-@EnableJpaRepositories("com.springHelloWorld.repository") // Package containing your repositories
-//TODO: EntityScan and ComponentScan. When and why are they needed?
-@ComponentScan(basePackages = "com.springHelloWorld.model")
+@EnableJpaRepositories("com.springHelloWorld.dao") // Package containing repositories
+@ComponentScan(basePackages = "com.springHelloWorld")
 public class SpringHelloWorldApplication {
 
 	public static void main(String[] args) {
