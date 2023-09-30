@@ -8,6 +8,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
+
 @Repository
 public class PgJdbcTemplate{
 
@@ -30,4 +32,9 @@ public class PgJdbcTemplate{
         return student;
     }
 
+    public Student saveSingleStudentAndGetResult(Student student){
+        int id = student.getId();
+
+        jdbcTemplate.execute("INSERT INTO users (id,firstName,lastName) VALUES ('Joe', 'Cool') RETURNING id;",);
+    }
 }

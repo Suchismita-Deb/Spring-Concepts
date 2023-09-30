@@ -1,6 +1,6 @@
---DROP TABLE IF EXISTS student;
-create table IF NOT EXISTS student (
-	id INT,
+DROP TABLE IF EXISTS student;
+CREATE TABLE IF NOT EXISTS student (
+	id INT PRIMARY KEY,
 	first_name VARCHAR(50),
 	last_name VARCHAR(50),
 	gender VARCHAR(50),
