@@ -34,7 +34,6 @@ public class PgJdbcTemplate{
 
     public Student saveSingleStudentAndGetResult(Student student){
         int id = student.getId();
-
         jdbcTemplate.execute("INSERT INTO users (id,firstName,lastName) VALUES ('Joe', 'Cool') RETURNING id;",);
     }
 }
