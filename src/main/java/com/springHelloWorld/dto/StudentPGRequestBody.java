@@ -1,10 +1,7 @@
-package com.springHelloWorld.model;
+package com.springHelloWorld.dto;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import java.sql.Date;
 
 @Getter
@@ -12,11 +9,7 @@ import java.sql.Date;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder
-@Entity
-@Table(name="student")
-public class Student {
-    @Id
-    private int id;
+public class StudentPGRequestBody {
     private String firstName;
     private String lastName;
     private String gender;
