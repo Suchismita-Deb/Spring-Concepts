@@ -1,6 +1,7 @@
 package com.springHelloWorld.service;
 
 import com.springHelloWorld.dto.StudentPgDto;
+import com.springHelloWorld.dto.StudentSave;
 import com.springHelloWorld.mapper.StudentMapper;
 import com.springHelloWorld.model.Student;
 import com.springHelloWorld.dao.repository.StudentRepository;
@@ -30,5 +31,21 @@ public class StudentServiceWithPg {
                 .collect(Collectors.toList());
 */
         return null;
+    }
+
+    public int saveStudent(StudentSave studentSave){
+        Student student = Student.builder()
+                .id(4000)//Assign an id to be saved in the DB
+                .firstName(studentSave.firstName())
+                .lastName(studentSave.lastName())
+                .cityofbirth(studentSave.cityofbirth())
+                .dob(studentSave.dob())
+                .email(studentSave.email())
+                .email(studentSave.gender())
+                .university(studentSave.university())
+                .build();
+
+        Student savedStudent = studentRepository.save(student);
+        return savedStudent.getId();
     }
 }
