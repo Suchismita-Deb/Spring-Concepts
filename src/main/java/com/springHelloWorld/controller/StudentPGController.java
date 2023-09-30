@@ -31,8 +31,8 @@ public class StudentPGController {
 
     @PutMapping("/student/save")
     public Student saveSingleStudentJdbc(@RequestBody StudentPGRequestBody studentPGRequestBody){
-        studentServiceWithJdbcTemplatePg.saveSingleStudentPgJdbc(studentPGRequestBody);
-        return sDetail;
+        Student student = studentServiceWithJdbcTemplatePg.saveSingleStudentPgJdbc(studentPGRequestBody);
+        return student;
     }
 
 //    @PatchMapping("/student/patch/{id}")

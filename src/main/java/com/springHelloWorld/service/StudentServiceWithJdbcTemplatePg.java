@@ -45,7 +45,7 @@ public class StudentServiceWithJdbcTemplatePg {
         return student;
 
     }
-    public Student saveSingleStudentPgJdbc(@RequestBody StudentPGRequestBody studentPGRequestBody){
+    public Student saveSingleStudentPgJdbc(StudentPGRequestBody studentPGRequestBody){
         int newId = 1002;
         Student sDetail = Student.builder()
                 .id(newId)
@@ -58,5 +58,7 @@ public class StudentServiceWithJdbcTemplatePg {
                 .dob(studentPGRequestBody.getDob())
                 .build();
 
+        Student savedStudent = pgJdbcTemplate.saveSingleStudentAndGetResult(sDetail);
+        return savedStudent;
     }
 }
