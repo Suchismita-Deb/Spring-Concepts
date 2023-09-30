@@ -51,3 +51,13 @@ List<Student> findByDobDateAfter(@Param("date") LocalDate date);
 
 
 # PUT Calls
+
+# Postgres Db On Conflict Insert Statement
+```roomsql
+insert into student 
+(id, first_name, last_name, gender, cityofbirth, email, university, dob) 
+
+values (1, 'Anjanette', 'Pietrzyk', 'Female', 'Ugljevik', 'apietrzyk0@wufoo.com', 'Sul Ross State University', '1972-01-30')
+ 
+On CONFLICT(id) DO NOTHING;
+```

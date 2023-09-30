@@ -1,6 +1,7 @@
 package com.springHelloWorld.dto;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 public record StudentSave(
     String firstName,

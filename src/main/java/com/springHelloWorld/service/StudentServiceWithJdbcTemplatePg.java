@@ -1,5 +1,7 @@
 package com.springHelloWorld.service;
 
+import com.springHelloWorld.dao.pg.PgJdbcTemplate;
+import com.springHelloWorld.dto.StudentPGRequestBody;
 import com.springHelloWorld.dto.StudentPgDto;
 import com.springHelloWorld.dto.StudentSave;
 import com.springHelloWorld.mapper.StudentMapper;
@@ -8,18 +10,23 @@ import com.springHelloWorld.dao.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 @Service
-public class StudentServiceWithPg {
+public class StudentServiceWithJdbcTemplatePg {
     private StudentRepository studentRepository;
     private StudentMapper mapper;
 
+    private PgJdbcTemplate pgJdbcTemplate;
+
+
     @Autowired
-    public StudentServiceWithPg(@Qualifier("jpaStudentRepository") StudentRepository studentRepository, StudentMapper mapper) {
+    public StudentServiceWithJdbcTemplatePg(@Qualifier("jpaStudentRepository") StudentRepository studentRepository, StudentMapper mapper, PgJdbcTemplate pgJdbcTemplate) {
         this.studentRepository = studentRepository;
         this.mapper = mapper;
+        this.pgJdbcTemplate = pgJdbcTemplate;
     }
 
     public List<StudentPgDto> getStudentById()  {
@@ -31,6 +38,29 @@ public class StudentServiceWithPg {
                 .collect(Collectors.toList());
 */
         return null;
+    }
+
+    public Student getStudentByIdPgJdbc(int id){
+        Student student = pgJdbcTemplate.runQueryAndGetResult(id);
+
+        return student;
+
+    }
+    public Student saveSingleStudentPgJdbc(StudentPGRequestBody studentPGRequestBody){
+        int newId = 1002;
+        Student sDetail = Student.builder()
+                .id(newId)
+                .firstName(studentPGRequestBody.getFirstName())
+                .lastName(studentPGRequestBody.getLastName())
+                .gender(studentPGRequestBody.getGender())
+                .cityofbirth(studentPGRequestBody.getCityofbirth())
+                .email(studentPGRequestBody.getFirstName())
+                .university(studentPGRequestBody.getUniversity())
+                .dob(studentPGRequestBody.getDob())
+                .build();
+
+        Student savedStudent = pgJdbcTemplate.saveSingleStudentAndGetResult(sDetail);
+        return savedStudent;
     }
 
     public int saveStudent(StudentSave studentSave){

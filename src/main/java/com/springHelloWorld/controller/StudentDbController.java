@@ -27,7 +27,7 @@ public class StudentDbController {
             StudentNotFoundException, DbDownException, SomeBusinessException {
         int studentIntId = Integer.valueOf(studentId);
         if(true) {
-            throw new StudentNotFoundException("Student not found");
+            //throw new StudentNotFoundException("Student not found");
             //throw new DbDownException("DB is Down");
             //throw new IllegalArgumentException("test");
             //throw new SomeBusinessException("Some Business Exception");
