@@ -1,9 +1,10 @@
 package com.springHelloWorld.service;
 
+import com.springHelloWorld.dao.repository.StudentRepository;
 import com.springHelloWorld.dto.StudentDto;
+import com.springHelloWorld.dto.StudentSave;
 import com.springHelloWorld.mapper.StudentMapper;
 import com.springHelloWorld.model.Student;
-import com.springHelloWorld.dao.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class StudentServiceWithDb {
+public class StudentServiceWithDbRepository {
 
     private StudentRepository studentRepository;
     @Autowired
     private StudentMapper studentMapper;//Field Injection
 
-    public StudentServiceWithDb(@Qualifier("jpaStudentRepository") StudentRepository studentRepository) {//Constructor injection
+    public StudentServiceWithDbRepository(@Qualifier("jpaStudentRepository") StudentRepository studentRepository) {//Constructor injection
         this.studentRepository = studentRepository;
     }
 
@@ -43,5 +44,23 @@ public class StudentServiceWithDb {
                 .map(studentMapper::convert)
                 .collect(Collectors.toList());
         return studentDtoList;
+    }
+
+    public int saveStudent(StudentSave studentSave){
+        Student student = Student.builder()
+                //.id(4000)// If Primary key is provided, it behaves like an update statement
+                //.id(nextval('student_seq'))
+                .id(studentRepository.getNextSequence())
+                .firstName(studentSave.firstName())
+                .lastName(studentSave.lastName())
+                .cityofbirth(studentSave.cityofbirth())
+                .dob(studentSave.dob())
+                .email(studentSave.email())
+                .email(studentSave.gender())
+                .university(studentSave.university())
+                .build();
+
+        Student savedStudent = studentRepository.save(student);
+        return savedStudent.getId();
     }
 }

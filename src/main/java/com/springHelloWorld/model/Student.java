@@ -16,6 +16,7 @@ import java.sql.Date;
 @Table(name="student")
 public class Student {
     @Id
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
     private int id;
     private String firstName;
     private String lastName;

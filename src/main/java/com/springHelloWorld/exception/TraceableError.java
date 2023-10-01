@@ -6,7 +6,6 @@ import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Map;
 
 /**
  * A serializable traceable error for tracking and triaging exception and error flows in platform or framework

@@ -2,7 +2,6 @@ package com.springHelloWorld.dto;
 
 import lombok.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 
 @Getter

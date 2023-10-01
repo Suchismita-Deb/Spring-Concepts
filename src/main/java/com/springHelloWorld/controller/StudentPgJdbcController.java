@@ -1,7 +1,6 @@
 package com.springHelloWorld.controller;
 
 import com.springHelloWorld.dto.StudentPGRequestBody;
-import com.springHelloWorld.dto.StudentSave;
 import com.springHelloWorld.model.Student;
 import com.springHelloWorld.service.StudentServiceWithJdbcTemplatePg;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/jdbc")
-public class StudentPGController {
+public class StudentPgJdbcController {
 
     private StudentServiceWithJdbcTemplatePg studentServiceWithJdbcTemplatePg;
 
     @Autowired
-    public StudentPGController(StudentServiceWithJdbcTemplatePg studentServiceWithJdbcTemplatePg) {
+    public StudentPgJdbcController(StudentServiceWithJdbcTemplatePg studentServiceWithJdbcTemplatePg) {
         this.studentServiceWithJdbcTemplatePg = studentServiceWithJdbcTemplatePg;
     }
 
@@ -38,13 +37,5 @@ public class StudentPGController {
     }
 
 //    @PatchMapping("/student/patch/{id}")
-
-
-
-    @PutMapping(value = "/student/save",
-            produces = "application/json")
-    public int saveStudent(@RequestBody StudentSave student) {
-        return studentServiceWithJdbcTemplatePg.saveStudent(student);
-    }
 
 }

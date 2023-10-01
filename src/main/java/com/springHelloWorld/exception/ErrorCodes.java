@@ -1,7 +1,5 @@
 package com.springHelloWorld.exception;
 
-import org.apache.commons.lang3.StringUtils;
-
 public enum ErrorCodes {
 	ERR_122("122", "ERROR: Student is not present in the DB"),
 	ERR_123("123", "ERROR: DB is down"),

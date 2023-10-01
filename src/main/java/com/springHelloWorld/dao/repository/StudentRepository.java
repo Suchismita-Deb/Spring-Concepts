@@ -27,4 +27,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     // Custom query, JPQL, with Query Parameter
     @Query("SELECT s FROM Student s WHERE s.dob > :date")
     List<Student> findByDobDateAfter(@Param("date") LocalDate date);
+
+    @Query(nativeQuery = true, value = "SELECT nextval('student_seq');")
+    int getNextSequence();
 }

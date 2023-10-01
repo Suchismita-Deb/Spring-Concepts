@@ -9,3 +9,11 @@ CREATE TABLE IF NOT EXISTS student (
 	university VARCHAR(200),
 	dob DATE
 );
+
+CREATE SEQUENCE IF NOT EXISTS student_seq
+     AS INT
+    INCREMENT BY 1
+     MAXVALUE 10000
+    START WITH 1005
+     NO CYCLE
+    OWNED BY student.id
