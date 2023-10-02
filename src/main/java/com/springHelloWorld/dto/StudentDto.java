@@ -2,8 +2,6 @@ package com.springHelloWorld.dto;
 
 import lombok.*;
 
-import javax.validation.constraints.Email;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -14,6 +12,6 @@ public class StudentDto {
     private String city;
     private String sex;
     private String university;
-    @Email(message = "Incorrect EmailID received from DB")
+    //@Email(message = "Incorrect EmailID received from DB")
     private String emailId;
 }

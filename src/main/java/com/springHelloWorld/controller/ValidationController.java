@@ -6,15 +6,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
-
 @RestController
 @RequestMapping("/test") @Validated
 public class ValidationController {
 
     @GetMapping("/email")
-    public String testEmail(@Valid @Email(message = "Please provide a valid email address")
+    public String testEmail(//@Valid @Email(message = "Please provide a valid email address")
                             @RequestParam(value = "email") String email ,
                             @RequestParam(value = "greet", required = false, defaultValue = "No Val from Requesr") String greet,
                             @RequestParam(value = "count", required = false, defaultValue = "-1") Integer count) {

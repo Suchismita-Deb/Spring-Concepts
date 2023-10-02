@@ -3,6 +3,7 @@ package com.springHelloWorld.exception;
 import com.springHelloWorld.exception.business.DbDownException;
 import com.springHelloWorld.exception.business.SomeBusinessException;
 import com.springHelloWorld.exception.business.StudentNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 import static com.springHelloWorld.exception.ErrorCodes.*;
