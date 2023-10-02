@@ -49,14 +49,13 @@ public class StudentServiceWithDbRepository {
     public int saveStudent(StudentSave studentSave){
         Student student = Student.builder()
                 //.id(4000)// If Primary key is provided, it behaves like an update statement
-                //.id(nextval('student_seq'))
                 .id(studentRepository.getNextSequence())//Introducing Sequence
                 .firstName(studentSave.firstName())
                 .lastName(studentSave.lastName())
                 .cityofbirth(studentSave.cityofbirth())
                 .dob(studentSave.dob())
                 .email(studentSave.email())
-                .email(studentSave.gender())
+                .gender(studentSave.gender())
                 .university(studentSave.university())
                 .build();
 
