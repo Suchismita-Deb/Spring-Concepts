@@ -1,3 +1,5 @@
+SET search_path TO test;
+
 DROP TABLE IF EXISTS student;
 CREATE TABLE IF NOT EXISTS student (
 	id INT PRIMARY KEY,-- multiple entries in not PK
@@ -14,7 +16,7 @@ DROP SEQUENCE IF EXISTS student_seq;
 
 CREATE SEQUENCE IF NOT EXISTS student_seq
      AS INT
-    INCREMENT BY 2
+    INCREMENT BY 2 --Increment by 2
      MAXVALUE 10000
     START WITH 1005
      NO CYCLE
