@@ -165,7 +165,9 @@ services:
       - 5432:5432
 
   app:
-    build: ..
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8090:8090"
     depends_on:
