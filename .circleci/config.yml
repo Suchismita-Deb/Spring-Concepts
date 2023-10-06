@@ -70,7 +70,7 @@ jobs:
       # Build and push Docker image
       - run:
            name: Build and Push Docker Image
-           command: ./gradlew clean build jibDockerBuild -Dimage=$IMAGE_NAME:matu-backend-$CIRCLE_BUILD_NUM
+           command: ./gradlew clean build -Dimage=$IMAGE_NAME:matu-backend-$CIRCLE_BUILD_NUM
 
       # Store raw contents of source code
       - store_artifacts:
