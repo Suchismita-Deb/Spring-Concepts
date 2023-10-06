@@ -5,19 +5,6 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
-    docker:
-      - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
-    steps:
-      - checkout
-      - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
-
   build:
     docker:
       # specify the version you desire here
@@ -70,7 +57,7 @@ jobs:
       # Build and push Docker image
       - run:
            name: Build and Push Docker Image
-           command: ./gradlew clean build -Dimage=$IMAGE_NAME:matu-backend-$CIRCLE_BUILD_NUM
+           command: ./gradlew clean build jibDockerBuild -Dimage=$IMAGE_NAME:matu-backend-$CIRCLE_BUILD_NUM
 
       # Store raw contents of source code
       - store_artifacts:
