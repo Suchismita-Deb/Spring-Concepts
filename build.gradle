@@ -43,3 +43,9 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+jib {
+	from {
+		image = 'openjdk:17-jdk'
+	}
+}
