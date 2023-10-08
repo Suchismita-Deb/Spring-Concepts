@@ -63,6 +63,7 @@ On CONFLICT(id) DO NOTHING;
 ```
 
 
+
 # Introducing Sequence
 
 Sequence can be created with `schema.sql` file and can be used while inserting in the DB
