@@ -8,10 +8,6 @@ plugins {
 group = 'com.springHelloWorld'
 version = '1.0'
 
-//java {
-//	sourceCompatibility = '17'
-//}
-
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -38,6 +34,9 @@ dependencies {
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 	// https://mvnrepository.com/artifact/org.yaml/snakeyaml
 	implementation 'org.yaml:snakeyaml:2.2'
+	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui
+	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.3.0'
+
 }
 
 tasks.named('test') {

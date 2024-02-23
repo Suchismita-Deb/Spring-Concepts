@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class StudentServiceWithJdbcTemplatePg {
@@ -45,7 +46,7 @@ public class StudentServiceWithJdbcTemplatePg {
 
     }
     public Student saveSingleStudentPgJdbc(StudentPGRequestBody studentPGRequestBody){
-        int newId = 1002;
+        int newId = new Random().nextInt();
         Student sDetail = Student.builder()
                 .id(newId)
                 .firstName(studentPGRequestBody.getFirstName())

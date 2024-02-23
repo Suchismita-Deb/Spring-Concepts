@@ -179,3 +179,9 @@ services:
       SPRING_DATASOURCE_USERNAME: nichaurasia
       SPRING_DATASOURCE_PASSWORD: a
 ```
+
+Documentation
+
+[JSON Report : http://localhost:8090/v3/api-docs](http://localhost:8090/v3/api-docs)
+
+[HTML Report : http://localhost:8090/swagger-ui/index.html](http://localhost:8090/swagger-ui/index.html)

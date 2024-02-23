@@ -2,7 +2,7 @@ SET search_path TO test;
 
 DROP TABLE IF EXISTS student;
 CREATE TABLE IF NOT EXISTS student (
-	id INT PRIMARY KEY,-- multiple entries in not PK
+	id int PRIMARY KEY,-- multiple entries in not PK
 	first_name VARCHAR(50),
 	last_name VARCHAR(50),
 	gender VARCHAR(50),
