@@ -23,15 +23,25 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 
     @ExceptionHandler(Exception.class)
     public final ResponseEntity<Object> handleAllException(Exception ex, WebRequest request){
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+        ExceptionResponse exceptionResponse = ExceptionResponse.builder()
+                .timeStamp(new Date())
+                .errorMessage(ex.getMessage())
+                .exceptionType(request.getDescription(false))
+                .build();
+
         return  new ResponseEntity(exceptionResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     //Exception for Failed Validations
-    @Override
+//    @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
 
-        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), "Validation Failed", ex.getBindingResult().toString());
+        ExceptionResponse exceptionResponse = ExceptionResponse.builder()
+                .timeStamp(new Date())
+                .errorMessage("Validation Failed")
+                .exceptionType(ex.getBindingResult().toString())
+                .build();
+
         return  new ResponseEntity(exceptionResponse, HttpStatus.BAD_REQUEST);
     }
 }

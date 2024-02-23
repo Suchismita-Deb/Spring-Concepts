@@ -1,7 +1,8 @@
 package com.springHelloWorld.controller;
 
-import com.spring.reference.entity.Temperature;
-import com.spring.reference.service.TemperatureConvertorService;
+
+import com.springHelloWorld.model.Temperature;
+import com.springHelloWorld.service.TemperatureConvertorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,8 @@
 package com.springHelloWorld.controller;
 
-import com.spring.reference.entity.Currency;
-import com.spring.reference.service.CurrencyConvertorService;
+
+import com.springHelloWorld.model.Currency;
+import com.springHelloWorld.service.CurrencyConvertorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
