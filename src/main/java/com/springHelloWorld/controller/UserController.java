@@ -1,5 +1,8 @@
-package com.springHelloWorld.hardCoded;
+package com.springHelloWorld.controller;
 
+import com.springHelloWorld.model.User;
+import com.springHelloWorld.dao.UserDAOService;
+import com.springHelloWorld.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

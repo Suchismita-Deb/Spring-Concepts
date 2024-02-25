@@ -46,9 +46,8 @@ public class StudentServiceWithJdbcTemplatePg {
 
     }
     public Student saveSingleStudentPgJdbc(StudentPGRequestBody studentPGRequestBody){
-        int newId = new Random().nextInt();
         Student sDetail = Student.builder()
-                .id(newId)
+                .id(studentRepository.getNextSequence())
                 .firstName(studentPGRequestBody.getFirstName())
                 .lastName(studentPGRequestBody.getLastName())
                 .gender(studentPGRequestBody.getGender())
@@ -61,6 +60,4 @@ public class StudentServiceWithJdbcTemplatePg {
         Student savedStudent = pgJdbcTemplate.saveSingleStudentAndGetResult(sDetail);
         return savedStudent;
     }
-
-
 }

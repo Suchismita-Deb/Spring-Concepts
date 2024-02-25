@@ -1,4 +1,4 @@
-package com.springHelloWorld.hardCoded;
+package com.springHelloWorld.model;
 
 import lombok.*;
 
@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class User {
 	private Integer id;
-	@Size(min=2,message = "Names should be atleast characters long")
+	@Size(min=2,message = "Names should be at-least 2 characters long")
 	private String name;
 	@Past(message = "DOB Cannot be in the Future")
 	private Date dob;

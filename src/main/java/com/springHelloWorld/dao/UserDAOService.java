@@ -1,9 +1,9 @@
-package com.springHelloWorld.hardCoded;
+package com.springHelloWorld.dao;
 
+import com.springHelloWorld.model.User;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.Date;

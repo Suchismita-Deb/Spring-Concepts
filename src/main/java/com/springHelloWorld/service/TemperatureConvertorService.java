@@ -19,7 +19,7 @@ public class TemperatureConvertorService {
 
     public List<Double> convertTemperatureValues(List<Double> temperatures) {
         return temperatures.stream()
-                .map(temperature -> tempInCelcius(temperature))
+                .map(this::tempInCelcius)
                 .collect(Collectors.toList());
     }
 }

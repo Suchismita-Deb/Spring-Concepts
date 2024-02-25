@@ -1,19 +1,18 @@
 package com.springHelloWorld.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
+import java.time.ZonedDateTime;
+
+@Data
+@Builder
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class HelloWorldReturnBean {
 
 	private String message;
-
-	public HelloWorldReturnBean(String message) {
-		this.setMessage(message);
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
+	private ZonedDateTime time;
 }
